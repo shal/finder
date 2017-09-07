@@ -65,26 +65,22 @@ export default {
 </script>
 
 <style lang="scss">
-
-  $input-width: 98%;
-
-  input, .item {
-     width: $input-width;
-  }
-
   .selected {
-    font-weight: bold;
     background-color: lightblue;
   }
 
   .item {
     display: block;
-  }
+    padding: 5px;
 
-  .description {
-    display: block;
-    text-align: center;
-    width: 100%;
-  }
+    &:nth-of-type(1) {
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+    }
 
+    &:nth-last-of-type(1) {
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+  }
 </style>
