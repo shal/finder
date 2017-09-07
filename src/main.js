@@ -5,8 +5,8 @@ import Autocomplete from './components/Autocomplete.vue'
 
 Vue.use(VueResource)
 
-new Vue({
-  el: '#app',
+var vm = new Vue({
+  el: "#app",
   components: {
     autocomplete: Autocomplete
   }

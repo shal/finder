@@ -1,11 +1,18 @@
 <template>
 
-  <div>
-    <input type="text" v-model="input" v-on:keyup="fetchData">
-    <ul>
-      <li class="place"v-for="place in places">{{ place.description }}</li>
-    </ul>
-  </div>
+  <span>
+    <input type="text" v-model="input" :id="id" :class="inputClass" :placeholder="placeholder"
+           autocomplete="off"
+           @click="inFocus = true"
+           @keyup="keyPressed">
+
+          <span v-if="inFocus" class="item" v-for="item in items" @click="input = item"
+                :class="[input == item ? 'selected' : '', 'description', itemClass]">
+            {{ item }}
+          </span>
+
+
+  </span>
 
 </template>
 
@@ -16,22 +23,68 @@ let key = "AIzaSyBymZIk7_vshx1lrP5CLeGw7qP7vYZ-5Z8"
 export default {
   data() {
     return {
-      places: "",
-      input: ""
+      items: [],
+      input: "",
+      inFocus: false
     }
+  },
+  props: {
+    id: String,
+    inputClass: String,
+    listClass: String,
+    itemClass: String,
+    placeholder: String
   },
   methods: {
     fetchData: function () {
       var vm = this;
-      this.$http.get(url, { params: { input: vm.input, key: key } })
-        .then(response => this.places = response.body.predictions)
-    }
+      this.$http.get(url, { params: { input: vm.input, types: "(cities)",   key: key } })
+        .then(response => this.items = response.body.predictions.map((x) => x.description))
+    },
+    keyPressed: function (e) {
+      switch(e.code) {
+        case "ArrowUp": this.moveUp(); break;
+        case "ArrowDown": this.moveDown(); break;
+        case "Enter": this.end(); break;
+        default: this.fetchData()
+      }
+    },
+    moveDown: function () {
+      let index = this.items.indexOf(this.input) + 1
+      this.input = this.items[index % this.items.length]
+    },
+    moveUp: function () {
+      let index = this.items.indexOf(this.input) - 1
+      this.input = (index >= 0 ? this.items[index] : this.items[this.items.length - 1])
+    },
+    end: function () {
+      this.inFocus = false
+      }
   }
 }
 </script>
 
 <style lang="scss">
- .place {
-    color: green;
-}
+
+  $input-width: 98%;
+
+  input, .item {
+     width: $input-width;
+  }
+
+  .selected {
+    font-weight: bold;
+    background-color: lightblue;
+  }
+
+  .item {
+    display: block;
+  }
+
+  .description {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+
 </style>
