@@ -5,9 +5,13 @@ import Autocomplete from './components/Autocomplete.vue'
 
 Vue.use(VueResource)
 
-var vm = new Vue({
-  el: "#app",
+Vue.create = function (options) {
+  return new Vue(options)
+}
+
+Vue.create({
   components: {
     autocomplete: Autocomplete
-  }
+  },
+  el: '#app'
 })

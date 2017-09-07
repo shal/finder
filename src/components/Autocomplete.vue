@@ -17,14 +17,14 @@
 </template>
 
 <script>
-let url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json"
-let key = "AIzaSyBymZIk7_vshx1lrP5CLeGw7qP7vYZ-5Z8"
+let url = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json'
+let key = 'AIzaSyBymZIk7_vshx1lrP5CLeGw7qP7vYZ-5Z8'
 
 export default {
   data() {
     return {
       items: [],
-      input: "",
+      input: '',
       inFocus: false
     }
   },
@@ -37,15 +37,15 @@ export default {
   },
   methods: {
     fetchData: function () {
-      var vm = this;
-      this.$http.get(url, { params: { input: vm.input, types: "(cities)",   key: key } })
+      let vm = this
+      this.$http.get(url, { params: { input: vm.input, types: '(cities)',   key: key } })
         .then(response => this.items = response.body.predictions.map((x) => x.description))
     },
     keyPressed: function (e) {
       switch(e.code) {
-        case "ArrowUp": this.moveUp(); break;
-        case "ArrowDown": this.moveDown(); break;
-        case "Enter": this.end(); break;
+        case 'ArrowUp': this.moveUp(); break;
+        case 'ArrowDown': this.moveDown(); break;
+        case 'Enter': this.end(); break;
         default: this.fetchData()
       }
     },
