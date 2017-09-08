@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 
 import Autocomplete from './components/Autocomplete.vue'
+import View from './components/View.vue'
 
 Vue.use(VueResource)
 
@@ -11,7 +12,8 @@ Vue.create = function (options) {
 
 Vue.create({
   components: {
-    autocomplete: Autocomplete
+    autocomplete: Autocomplete,
+    mainView: View
   },
   el: '#app'
 })
