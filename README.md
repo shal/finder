@@ -1,18 +1,10 @@
 # finder
 
-> A Vue.js project
+# About
 
-## Build Setup
+Component for vuejs, that work with google places API.
 
-``` bash
-# install dependencies
-npm install
+Gives ability to add input for city with autocomplete.
 
-# serve with hot reload at localhost:8080
-npm run dev
+Made just for vuejs learning :sweat_smile:
 
-# build for production with minification
-npm run build
-```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
